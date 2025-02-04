@@ -1,19 +1,19 @@
 class Solution(object):
-  def guessNumber(self,n):
-    low,high = 1, n
-    while low <= high:
-      mid = (low +high) // 2
-      if guess(mid) == -1: #guess() is offered as an api
-        high = mid -1
-      elif guess(mid) == 1:
-        low = mid - 1
-      else:
-        return mid
+    def getMoneyAmount(self, n):
+        def dp(s, e):  # Recursive function to find the minimum cost in range [s, e]
+            if (s, e) in memo:
+                return memo[(s, e)]  # Return cached result if already computed
+            if s >= e:  
+                return 0  # If only one number left, cost is 0 (already found the number)
+            
+            ans = sys.maxsize  # Initialize answer to a very large number
 
-if __name__ == '__main--':
-  n = 10
-  solution = Solution()
-  print(solution.guessNumber(n))
+            for x in range(s, e + 1):  # Try every number as a potential guess
+                next_step = max(dp(s, x - 1), dp(x + 1, e))  # Worst-case cost
+                ans = min(ans, x + next_step)  # Take the minimum cost of all strategies
 
-# Time complexity: O(logn)
-# Space complexity: O(1)
+            memo[(s, e)] = ans  # Memoize result for this range
+            return ans
+        
+        memo = {}  # Dictionary for memoization
+        return dp(1, n)  # Start with the full range [1, n]
