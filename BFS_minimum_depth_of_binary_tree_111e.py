@@ -11,13 +11,15 @@ class Solution(object):
     if not root:
       return 0
     
-    queue = deque([(root,1)])
+    queue = deque([(root,1)]) #make the queue with the root and its depth
     while queue:
-      node, depth = queue.popleft()
+      node, depth = queue.popleft()  
+      #  FIFO, so it is popleft, then unpack the tuple into node and depth
 
       if not node.left and not node.right:
         return depth
-      if node.left:
+      
+      if node.left: # add children to the queue of the same level, which is left and right children
         queue.append((node.left, depth+1))
       if node.right:
         queue.append((node.right, depth+1))
