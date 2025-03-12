@@ -31,8 +31,9 @@ class Solution (object):
             grid[row_new][col_new] = 2
             fresh -= 1
             queue.append((row_new, col_new)) #add new rotten orange to the queue
-      minutes += 1 #for each rotten in the queue, we add 1 minute
-      return minutes if fresh ==0 else -1
+      if queue:
+        minutes += 1 #for each rotten in the queue, we add 1 minute, if queue is empty, we don't add 1 minute
+    return minutes if fresh ==0 else -1
     #return -1 if not all oranges are rotten
 
 # Time complexity: O(n)
